@@ -189,4 +189,124 @@ O(n)
 
 ------------------------------------------------------------------------------------------------------------
 
+For Q4
+-------
 
+## Algorithm: Turn Off All Security Switches
+
+1. Represent the switches as an array `S[1...n]`, where initially every switch is `ON`.
+2. Start from the rightmost switch.
+3. Turn OFF the rightmost switch.
+4. To turn OFF the next switch to the left, first ensure that its immediate right switch is ON and every switch further right is OFF.
+5. Toggle the required switches recursively so that the switching condition is satisfied.
+6. Continue this process until the leftmost switch is turned OFF.
+7. The resulting sequence contains the minimum number of moves.
+
+### Minimum Number of Moves
+
+The minimum number of moves follows the recurrence:
+
+```text
+T(n) = 2T(n-1) + 1
+```
+
+with:
+
+```text
+T(1) = 1
+```
+
+Solving the recurrence:
+
+```text
+T(n) = 2^n - 1
+```
+
+For `n` switches, the minimum number of moves is:
+
+```text
+2^n - 1
+```
+
+## Complexity Analysis
+
+**Time Complexity:**
+
+```text
+O(2^n)
+```
+
+**Space Complexity:**
+
+```text
+O(n)
+```
+
+------------------------------------------------
+
+For Q5
+------
+
+## Algorithm: Guaranteed Target Hitting
+
+1. Number the hiding spots from `1` to `n`.
+2. Start by shooting at spot `1`.
+3. Shoot the spots consecutively from left to right:
+   `1, 2, 3, ..., n`.
+4. After reaching spot `n`, reverse the direction.
+5. Shoot the spots from right to left:
+   `n, n-1, ..., 1`.
+6. Continue alternating between left-to-right and right-to-left sweeps.
+7. Since the target can move only one adjacent position between shots, it cannot continuously avoid the shooter's sweep.
+8. Therefore, the target is eventually hit.
+
+## Complexity Analysis
+
+**Time Complexity:**
+
+```text
+O(n)
+```
+
+**Space Complexity:**
+
+```text
+O(1)
+```
+
+-------------------------------
+
+For Q6
+------
+
+THE-BEST-TIME-TO-BE-ALIVE(index[1..n])
+
+1.  let E[1..2n] be a new array           // event array
+2.  k = 0
+3.  for i = 1 to n
+4.      k = k + 1
+5.      E[k] = (index[i].birth,  +1)      // birth event
+6.      k = k + 1
+7.      E[k] = (index[i].death,  -1)      // death event
+
+8.  sort E by year;
+        if years are equal, put -1 event (death) before +1 event (birth)
+
+9.  alive = 0
+10. maxAlive = 0
+11. bestYear = NIL
+
+12. for j = 1 to 2n
+13.     alive = alive + E[j].type          // update count
+14.     if alive > maxAlive
+15.         maxAlive = alive
+16.         bestYear = E[j].year
+
+17. return (bestYear, maxAlive)
+
+Complexity Analysis
+Step	Time
+Build event array	O(n)
+Sort events	O(n log n)
+Sweep to find max	O(n)
+Total	O(n log n)
